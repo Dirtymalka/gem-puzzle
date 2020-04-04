@@ -1,0 +1,55 @@
+body {
+  background-color: #80808047;
+  margin: 0;
+  max-width: 400px;
+  margin: 0 auto;
+}
+
+.option-field {
+  display: flex;
+  justify-content: space-between;
+}
+
+.information-field {
+  display: flex;
+}
+
+.steps-container {
+  display: flex;
+  align-items: baseline;
+  margin-right: 50px;
+}
+
+.time-container {
+  display: flex;
+  align-items: baseline;
+}
+
+.container {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  grid-template-rows: repeat(4, 1fr);
+  width: 400px;
+  height: 400px;
+  margin: 0 auto;
+  border: 3px solid #27272280;
+  box-sizing: border-box;
+}
+
+.cub {
+  background-color: #27272280;
+  border: 2px solid #dbdbdb;
+}
+
+.free {
+  background-color: #dbdbdb;
+}
+
+.factSize {
+  display: flex;
+  align-items: baseline;
+}
+
+.changeSize {
+  display: flex;
+}
