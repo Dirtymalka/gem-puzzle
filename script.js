@@ -118,131 +118,134 @@ createField(fields['gameBoard4*4']);
 
 // Moving Cubs
 const container = document.querySelector('.container');
-container.addEventListener('click', (event) => {
-  const freeElement = container.querySelector('.free');
-  const movingCub = event.target;
-  let coordinateFree = freeElement.getBoundingClientRect();
-  let coordinateMovingCub = movingCub.getBoundingClientRect();
+// container.addEventListener('click', (event) => {
+//   const freeElement = container.querySelector('.free');
+//   const movingCub = event.target;
+//   let coordinateFree = freeElement.getBoundingClientRect();
+//   let coordinateMovingCub = movingCub.getBoundingClientRect();
 
-  if (movingCub.classList.contains('cub') && !movingCub.classList.contains('free')) {
-    if (coordinateMovingCub.left + coordinateMovingCub.width === coordinateFree.left && coordinateMovingCub.top === coordinateFree.top) {
-      movingCubs();
-      countSteps();
-    }
-
-    if (coordinateMovingCub.top + coordinateMovingCub.height === coordinateFree.top && coordinateMovingCub.left === coordinateFree.left) {
-      movingCubs();
-      countSteps();
-    }
-
-    if (coordinateMovingCub.top - coordinateMovingCub.height === coordinateFree.top && coordinateMovingCub.left === coordinateFree.left) {
-      movingCubs();
-      countSteps();
-    }
-
-    if (coordinateMovingCub.left - coordinateMovingCub.width === coordinateFree.left && coordinateMovingCub.top === coordinateFree.top) {
-      movingCubs();
-      countSteps();
-    }
-  }
-
-  function movingCubs() {
-    const outerMovingCub = movingCub.outerHTML;
-    movingCub.outerHTML = freeElement.outerHTML;
-    freeElement.outerHTML = outerMovingCub;
-  }
-});
-
-// const cubs = document.querySelectorAll('.cub');
-// console.log(cubs);
-// cubs.forEach((item, index) => {
-//   item.addEventListener('mousedown', (event) => {
-//     const freeClone = container.querySelector('.free').cloneNode(false).outerHTML;
-//     const firstIndex = cubs[index];
-//     cubs[index].outerHTML = freeClone;
-//     item.style.position = 'absolute';
-//     item.style.zIndex = 5;
-//     document.body.append(item);
-
-//     console.log(item.getAttribute('left'));
-//     console.log(item.getBoundingClientRect());
-
-//     moveAt(event.pageX, event.pageY);
-
-//     function moveAt(pageX, pageY) {
-//       item.style.left = pageX - item.offsetWidth / 2 + 'px';
-//       item.style.top = pageY - item.offsetHeight / 2 + 'px';
+//   if (movingCub.classList.contains('cub') && !movingCub.classList.contains('free')) {
+//     if (coordinateMovingCub.left + coordinateMovingCub.width === coordinateFree.left && coordinateMovingCub.top === coordinateFree.top) {
+//       movingCubs();
+//       countSteps();
 //     }
 
-//     function onMouseMove(event) {
-//       moveAt(event.pageX, event.pageY);
+//     if (coordinateMovingCub.top + coordinateMovingCub.height === coordinateFree.top && coordinateMovingCub.left === coordinateFree.left) {
+//       movingCubs();
+//       countSteps();
 //     }
 
-//     document.addEventListener('mousemove', onMouseMove);
+//     if (coordinateMovingCub.top - coordinateMovingCub.height === coordinateFree.top && coordinateMovingCub.left === coordinateFree.left) {
+//       movingCubs();
+//       countSteps();
+//     }
 
+//     if (coordinateMovingCub.left - coordinateMovingCub.width === coordinateFree.left && coordinateMovingCub.top === coordinateFree.top) {
+//       movingCubs();
+//       countSteps();
+//     }
+//   }
 
-//     item.onmouseup = function () {
-
-//       container.append(item);
-//       item.style.position = 'static';
-//       document.querySelectorAll('.cub')[index].outerHTML = item.outerHTML;
-//       item.remove;
-//       document.removeEventListener('mousemove', onMouseMove);
-//       item.onmouseup = null;
-//     };
-//   });
+//   function movingCubs() {
+//     const outerMovingCub = movingCub.outerHTML;
+//     movingCub.outerHTML = freeElement.outerHTML;
+//     freeElement.outerHTML = outerMovingCub;
+//   }
 // });
+const addPuzzlesClickHandler = () => {
+  document.querySelectorAll('.cub').forEach((item) => {
+    item.addEventListener('mousedown', (event) => {
+      const freeElement = container.querySelector('.free');
+      const movingCub = item;
+      let coordinateFree = freeElement.getBoundingClientRect();
+      let coordinateMovingCub = movingCub.getBoundingClientRect();
+      const itemWidth = coordinateMovingCub.width;
+      const itemHeight = coordinateMovingCub.height;
+
+      const cubs = document.querySelectorAll('.cub');
+
+      if (!(coordinateMovingCub.left + coordinateMovingCub.width === coordinateFree.left && coordinateMovingCub.top === coordinateFree.top
+        || coordinateMovingCub.top + coordinateMovingCub.height === coordinateFree.top && coordinateMovingCub.left === coordinateFree.left
+        || coordinateMovingCub.top - coordinateMovingCub.height === coordinateFree.top && coordinateMovingCub.left === coordinateFree.left
+        || coordinateMovingCub.left - coordinateMovingCub.width === coordinateFree.left && coordinateMovingCub.top === coordinateFree.top) || item.classList.contains('free')) return;
+
+      let freeClone = freeElement.cloneNode(true);
+      freeClone.className = 'clone';
+      item.replaceWith(freeClone);
+
+      let shiftX = event.clientX - item.getBoundingClientRect().left;
+      let shiftY = event.clientY - item.getBoundingClientRect().top;
+
+      item.style.position = 'absolute';
+      item.style.width = itemWidth + 'px';
+      item.style.height = itemHeight + 'px';
+      item.style.zIndex = 90;
+      document.body.append(item);
 
 
-// moveAt(event.pageX, event.pageY);
+      console.log(event);
+      console.log(shiftX);
+      console.log(item.getBoundingClientRect().left);
 
-// 	function moveAt(pageX, pageY) {
-// 		item.style.left = pageX - item.offsetWidth / 2 + 'px';
-// 		item.style.top = pageY - item.offsetHeight / 2 + 'px';
-// 	}
+      moveAt(event.pageX, event.pageY);
 
-// 	function onMouseMove(event) {
-// 		moveAt(event.pageX, event.pageY);
+      function moveAt(pageX, pageY) {
+        item.style.left = pageX - item.offsetWidth / 2 + 'px';
+        item.style.top = pageY - item.offsetHeight / 2 + 'px';
+      }
 
-// 	}
+      function onMouseMove(event) {
+        moveAt(event.pageX, event.pageY);
+        console.log('h');
+      }
 
-// 	document.addEventListener('mousemove', onMouseMove);
-
-// 	item.onmouseup = function(event) {
-// 		container.append(item);
-// 		item.style.zIndex = 2;
-
-// 		document.removeEventListener('mousemove', onMouseMove);
-// 		container.onmouseup = null;
-
-// 		if (event.pageX >= coordinateFree.x && event.pageX <= coordinateFree.x + coordinateFree.width && event.pageY >= coordinateFree.y && event.pageY <= coordinateFree.y + coordinateFree.width &&
-// 			(leftItem + item.getBoundingClientRect().width  === leftFreeElement && topItem === topFreeElement ||
-// 			 topItem + item.getBoundingClientRect().height === topFreeElement && leftItem === leftFreeElement ||
-// 			 leftItem - item.getBoundingClientRect().width  === leftFreeElement && topItem === topFreeElement ||
-// 			 topItem - item.getBoundingClientRect().height === topFreeElement && leftItem === leftFreeElement)) {
-// 			console.log('hi');
-// 			item.style.top = topFreeElement + 'px';
-// 			item.style.left = leftFreeElement + 'px';
-// 			freeElement.style.top = topItem + 'px';
-// 			freeElement.style.left = leftItem + 'px';
-// 		} else {
-// 			item.style.top = topItem + 'px';
-// 		    item.style.left = leftItem + 'px';
-// 		}
+      document.addEventListener('mousemove', onMouseMove);
 
 
-// 	};
+      item.onmouseup = function (event) {
+        // if (coordinateMovingCub.left + coordinateMovingCub.width === coordinateFree.left && coordinateMovingCub.top === coordinateFree.top
+        //   || coordinateMovingCub.top + coordinateMovingCub.height === coordinateFree.top && coordinateMovingCub.left === coordinateFree.left
+        //   || coordinateMovingCub.top - coordinateMovingCub.height === coordinateFree.top && coordinateMovingCub.left === coordinateFree.left
+        //   || coordinateMovingCub.left - coordinateMovingCub.width === coordinateFree.left && coordinateMovingCub.top === coordinateFree.top) {
+        if (event.pageX >= freeElement.getBoundingClientRect().left && event.pageX <= freeElement.getBoundingClientRect().left + freeElement.getBoundingClientRect().width
+          && event.pageY >= freeElement.getBoundingClientRect().top && event.pageY <= freeElement.getBoundingClientRect().top + freeElement.getBoundingClientRect().height) {
+          // console.log('1');
+          document.querySelector('.free').replaceWith(item);
+          document.querySelector('.clone').replaceWith(freeElement);
+          //container.append(item);
+          item.style.position = 'static';
+          item.style.width = '';
+          item.style.height = '';
+          countSteps();
+        } else if (event.pageX >= document.querySelector('.clone').getBoundingClientRect().left && event.pageX <= document.querySelector('.clone').getBoundingClientRect().left + document.querySelector('.clone').getBoundingClientRect().width
+          && event.pageY >= document.querySelector('.clone').getBoundingClientRect().top && event.pageY <= document.querySelector('.clone').getBoundingClientRect().top + document.querySelector('.clone').getBoundingClientRect().height) {
 
-// })
+          document.querySelector('.free').replaceWith(item);
+          document.querySelector('.clone').replaceWith(freeElement);
+          //container.append(item);
+          item.style.position = 'static';
+          item.style.width = '';
+          item.style.height = '';
+          countSteps();
+        } else {
+          //container.append(item);
+          document.querySelector('.clone').replaceWith(item);
+          item.style.position = 'static';
+          item.style.width = '';
+          item.style.height = '';
+        }
+        document.removeEventListener('mousemove', onMouseMove);
+        item.onmouseup = null;
+      };
+    });
+  });
+};
 
-// })
-
-
-
+addPuzzlesClickHandler();
 
 
 // Count Steps
-const countSteps = (function () {
+const countSteps = (function startCount() {
   let count = 0;
   return function () {
     count += 1;
@@ -277,6 +280,8 @@ const timer = function () {
 // Event with click on option buttons
 optionField.addEventListener('click', (event) => {
   if (event.target.classList.contains('start')) {
+    event.target.classList.remove('active');
+    event.target.classList.add('active');
     document.querySelector('.stop').classList.remove('stop-timer');
     document.querySelector('.steps-current').innerHTML = 0;
     mixCubs();
@@ -285,7 +290,6 @@ optionField.addEventListener('click', (event) => {
   if (event.target.classList.contains('stop')) {
     document.querySelector('.stop').classList.add('stop-timer');
   }
-
 });
 
 // Mix Cubs
@@ -324,6 +328,7 @@ changeSize.addEventListener('click', (event) => {
   if (event.target.tagName === 'BUTTON') {
     changeSizeOfBoard(event.target.getAttribute('class'));
     document.querySelector('.size').innerHTML = event.target.innerHTML;
+    addPuzzlesClickHandler();
   }
 });
 
