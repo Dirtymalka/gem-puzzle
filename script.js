@@ -145,13 +145,14 @@ function createField(field) {
   buttonOk.innerText = 'OK';
   rules.append(buttonOk);
 
+
+  const results = document.createElement('div');
+  results.classList = 'resultsList';
+  document.body.append(results);
   if (localStorage.getItem('result')) {
     document.querySelector('.resultsList').textContent = localStorage.getItem('result');
   } else {
-    const results = document.createElement('div');
-    results.classList = 'resultsList';
-    results.innerText = 'Your results!\n ';
-    document.body.append(results);
+    document.querySelector('.resultsList').innerText = 'Your results!\n ';
   }
 
 }
