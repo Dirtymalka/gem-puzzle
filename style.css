@@ -1,0 +1,255 @@
+html {
+  font-size: 10px;
+}
+
+body {
+  background-color: #80808047;
+  margin: 0;
+  max-width: 400px;
+  margin: 0 auto;
+  font-size: 1.5rem;
+  font-family: Verdana, sans-serif;
+}
+
+p {
+  margin: 0;
+}
+
+.title {
+  font-size: 3rem;
+  font-weight: 900;
+  text-align: center;
+  padding-bottom: 10px;
+  border-bottom: 5px solid #005affbd;
+  margin-bottom: 10px;
+  color: #005aff;
+}
+
+.option-field {
+  display: flex;
+  justify-content: space-between;
+}
+
+.information-field {
+  display: flex;
+  margin: 10px 0;
+}
+
+.factSize {
+  margin: 10px 0;
+}
+
+.steps-container {
+  display: flex;
+  align-items: baseline;
+  margin-right: 50px;
+}
+
+.steps-container p {
+  margin-right: 5px;
+}
+
+.time-container {
+  display: flex;
+  align-items: baseline;
+}
+
+.time-container p {
+  margin-right: 5px;
+}
+
+.container {
+  position: relative;
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  grid-auto-rows: 1fr;
+  width: 100%;
+  height: 400px;
+  margin: 0 auto;
+  border: 3px solid #27272280;
+  box-sizing: border-box;
+}
+
+.cub {
+  background-color: #27272280;
+  border: 2px solid #dbdbdb;
+  display: inline-flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 2rem;
+  font-weight: bolder;
+  color: #dbdbdb;
+  cursor: pointer;
+  max-width: 100%;
+}
+
+.free {
+  background-color: #dbdbdb;
+}
+
+.factSize {
+  display: flex;
+  align-items: baseline;
+}
+
+.factSize p {
+  padding-right: 5px;
+}
+
+.changeSize {
+  display: flex;
+}
+
+button:hover {
+  cursor: pointer;
+}
+
+.sizesField {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.block-display {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  z-index: 100;
+  background-color: rgba(70, 41, 41, 0.28);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.block-display span {
+  padding: 10%;
+  padding: 10%;
+  background: #fffffff0;
+}
+
+.option-field button {
+  width: 23%;
+}
+
+.changeSize button {
+  margin: 0 3px;
+}
+
+.rules-button {
+  width: 100%;
+  height: 30px;
+  margin-top: 10px;
+}
+
+.rules {
+  position: absolute;
+  width: 40rem;
+  width: 40rem;
+  height: 53.5rem;
+  top: 6rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  z-index: 200;
+  background-color: rgba(116, 111, 117, 0.9);
+  color: #ffffff;
+  font-size: 1.8rem;
+}
+
+.rules span {
+  text-align: center;
+}
+
+.rules button {
+  margin-top: 15px;
+}
+
+.complited {
+  position: absolute;
+  width: 40rem;
+  width: 40rem;
+  height: 53.5rem;
+  top: 6rem;
+  z-index: 200;
+  background-color: rgba(116, 111, 117, 0.9);
+  color: #ffffff;
+  font-size: 1.8rem;
+  text-align: center;
+  visibility: initial;
+}
+
+.resultsList {
+  position: absolute;
+  width: 40rem;
+  width: 40rem;
+  height: 53.5rem;
+  top: 6rem;
+  z-index: 400;
+  background-color: rgba(116, 111, 117, 0.9);
+  color: #ffffff;
+  font-size: 1.8rem;
+  text-align: center;
+  visibility: hidden;
+}
+
+
+@keyframes bobble1 {
+  0% {
+      transform: translate3d(-1020px, 0px, 0px);
+      animation-timing-function: linear;
+  }
+  100% {
+      transform: translate3d(0px, 0px, 0px);
+      animation-timing-function: linear;
+  }
+}
+
+@keyframes bobble2 {
+  0% {
+      transform: translate3d(0px, 0px, 0px);
+      animation-timing-function: linear;
+  }
+  100% {
+      transform: translate3d(1020px, 0px, 0px);
+      animation-timing-function: linear;
+  }
+}
+
+@keyframes bobble3 {
+  0% {
+      transform: translate3d(0, 0px, 0px);
+      animation-timing-function: linear;
+  }
+  100% {
+      transform: translate3d(-1020px, 0px, 0px);
+      animation-timing-function: linear;
+  }
+}
+
+@keyframes bobble4 {
+  0% {
+      transform: translate3d(1020px, 0px, 0px);
+      animation-timing-function: linear;
+  }
+  100% {
+      transform: translate3d(0px, 0px, 0px);
+      animation-timing-function: linear;
+  }
+}
+
+div.animation1 {
+  animation: bobble1 1s forwards;
+}
+
+div.animation2 {
+  animation: bobble2 1s forwards;
+}
+
+div.animation3 {
+  animation: bobble3 1s forwards;
+}
+
+div.animation4 {
+  animation: bobble4 1s forwards;
+}
